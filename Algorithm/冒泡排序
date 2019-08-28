@@ -1,0 +1,30 @@
+冒泡排序：
+时间复杂度o（n^2),额外空间复杂度为o（1）,实现可以做到稳定性。
+从第一个开始，后面的数比他小就交换，最大的数字换到了最后一位，
+接下来遍历n-1个数
+
+n次遍历，每次n个数，时间复杂度n的平方。
+
+
+public static void bubbleSort{
+
+if(arr == null || arr.length < 2){
+return;
+}
+
+for(int end = arr.length - 1,end > 0,end --){
+  for(int i = 0, i < end ,i++){
+    if(arr[i] > arr[i + 1]){
+    swap(arr,i,i + 1);
+    }
+  }
+}
+
+}
+
+//swap 方法：
+ public static void swap(int[] arr, int i, int j){
+ int tmp = arr[i];
+ int arr[i] = arr[j];
+ int arr[j] = tmp;
+ }
