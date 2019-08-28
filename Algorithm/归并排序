@@ -1,0 +1,47 @@
+时间复杂度 o(nlogn)
+空间 o(n)
+
+public static void mergrSort(int arr[]){
+  if(arr == null || arr.length < 2){
+  return;
+  }
+  sortProcess(arr, 0, arr.length - 1);
+}
+
+public static void sortProcess(int[] arr,int L, int R){
+  int mid = L + ((R - L)/2);
+  sortProcess( arr,  L, mid);                                 //递归在这
+  sortProcess(arr, mid + 1, R);                               //递归在这
+  merge(arr, L, mid, R);                                      //左右递归完成后，进行外排序 -> 
+                                                              //左右两边的数组 ，依次从头开始比较，较小数放入外部地址，
+                                                              //同时他的指针向后移一位，继续比较。
+}
+
+public static void merge(int[] arr, int L ,int mid, int R){   //合并行为，非递归。
+  int[] help = new int[ r - l + 1];
+  int i = 0;                                                  //help数组的角标，依次将比较得来的数填入到help；
+  
+  int p1 = L;
+  int p2 = mid +1;  
+  //需要考虑角标越界情况，分别有 左右均不越界时，左、右。
+  while(p1 <= m && p2 <= R){
+    help[i] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];       // 此处<= 或者< 均可；
+    i++;
+  }
+  
+  //有越界时。
+  //如：[1, 2, 3, 4,|| 5, 6, 7, 8,]
+  //回出p1=3 时，p2= 4，下一时刻，p1即将越界，因为下一时刻p1++出界。
+  while(p1 <= m){
+    help[i++] = arr[p1++];
+  }
+    while(p2 <= R){
+    help[i++] = arr[p2++];
+  }
+  for(i = 0;i < help.length; i ++)
+  {
+  arr[ L + i ] = help[i];                             //将help拷贝回arr。
+  }
+  
+}
+ 
