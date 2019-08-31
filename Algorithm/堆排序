@@ -1,0 +1,54 @@
+堆排序：
+第一步 heapinsert 将数入堆，大数网上走的过程；
+第二部heapify 最大数从头位置往下走；
+
+
+
+完全二叉树
+从左侧开始形成完全二叉树
+从左往右一空不留
+
+public static viod headSort(int[] arr){
+
+if(arr == null || arr.length < 2){
+  return;
+  }
+  
+  for(int i = 0; i < arr.length ; i ++){
+    headInsert(arr, i);
+     }
+   //完全二叉树在这步形成，接下来进行的是最大值与最后一个值swap，并且size减1。
+  int size = arr.length;
+  swap(arr, 0, --size);
+  
+    
+  while(size > 0){
+    headify(arr, 0, size);
+    swap(arr, 0, --size);
+    }
+}
+
+public static void headInsert(int[] arr, int index){
+ while(arr[index] > arr[(index -1)/2]){ 
+  swap(arr, index, (index - 1)/2);
+  index = (index -1)/2;
+  }
+}
+
+pubilc static void heapify(int[] arr, int index, int size){
+  int left = index * 2 + 1;
+ //开始对高位大数进行遍历下移操作。 
+  while(size > 0){
+  int larger = arr[left] > arr[left + 1] && left + 1 < size ? left : left + 1;
+  larger = arr[index] < arr[larger] ? larger : index;
+  
+  if(index == larger){
+  break;
+  }
+  //某个孩子比我大，那个孩子的位置是larger。
+  swap(arr, index, larger);
+  
+  index = larger;
+  left = index * 2 + 1;
+  }
+}
