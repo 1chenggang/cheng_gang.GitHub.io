@@ -1,0 +1,32 @@
+桶排序
+不基于比较的排序
+
+如：0-200为数据范围，一共有几亿个数，
+则建立201个桶，针对数，放入桶中，
+最后倒入数列中。
+
+分两种情况：
+计数排序，桶容器中，每个位置只计数，不填数据。
+code：
+public static void bucketSort(int[] arr){
+  if(arr == null || arr.length < 2){
+    return;
+  }
+  int max = Integer.MIN_VALUE;                //最小值为Integer.MIN_VALUE -2147483648。
+  for(int i = 0,l i < arr.length; i ++){
+    max = Math.max(max, arr[i]);              //找到数组的最大值，将 这个值+1 作为help数组的大小。
+  }
+  int[] bucket = new int[max + 1];
+  for(int i = 0;i < arr.length; i ++){
+    bucket[arr[i]] ++;
+  }
+  int i = 0;
+  for(int j = 0; j < bucket.length; j ++){
+    while(bucket[j] > 0){
+      arr[i] = j;
+      j --;
+      i ++;
+    }
+  }
+}
+
