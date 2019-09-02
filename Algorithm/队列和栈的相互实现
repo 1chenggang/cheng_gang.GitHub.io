@@ -1,0 +1,109 @@
+队列和栈的相互实现
+
+1 队列实现栈：
+使用两个队列构成一个黑盒，一个黑盒是原队列，一个空，将原队列除最后一个数之前的数，输入到空盒中，将原队列最后一个数pop；
+这样，原队列和空盒形成互换，循环调用这个方法即可。
+
+//java中
+//poll：Queue(队列)的一个方法，获取并移除此队列的头，如果此队列为空，则返回null
+//pop：Stack(栈)的方法，移除堆栈顶部的对象，并作为此函数的值返回该对象
+
+//LinkedList简介
+//LinkedList 是一个继承于AbstractSequentialList的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。
+//LinkedList 实现 List 接口，能进行队列操作。
+//LinkedList 实现 Deque 接口，即能将LinkedList当作双端队列使用。
+//ArrayList底层是由数组支持，而LinkedList 是由双向链表实现的，其中的每个对象包含数据的同时还包含指向链表中前一个与后一个元素的引用。
+
+code:
+
+public static class TwoQueuenStack{
+
+private Queuen<Integer> queue;
+private Queuen<Integer> help;
+
+  public TwoQueuenStack(){
+    queue = new LinkList<Integer>();
+    help = new LinkList<Integer>();
+  }
+  public void push(int pushInt){
+  queue.add(pushInt);
+  }
+  
+  public int peek(){
+    if( queue.isEmpty){
+      throw new RuntimeException("empty");
+    }
+    while(queue.size != 1){
+      help.add(queue.poll());
+    }
+    int res = queue.poll();
+    help.add(res);
+    swap();
+    return res;
+  }
+  
+  public int pop(){
+    if( queue.isEmpty){
+      throw new RuntimeException("empty");
+    }
+    while(queue.size > 1){
+      help.add(queue.poll());
+    }
+    int res = queue.poll();
+    swap();
+    ruturn res;
+  }
+  
+  public void swap(){
+    Queue<Integer> tmp = help;
+    help = queue;
+    queue = tmp;
+  }
+  
+}
+
+
+//
+
+
+栈结构形成队列结构
+使用两个栈，pop栈必须为空的时候，在能够继续压数
+
+public static class TwoStackQueuen{
+
+  private Stack<Integer> stackPush;
+  private Stack<Integer> stackPop;
+  
+  public TwoStackQueuen(){
+    stackpush = new Stack<Integer>();
+    stackpop = new Stack<Integer>();
+  }
+  public void goTo(){//实现一个在pop栈为空的情况下的一个 push栈内容逆次序到pop栈的guocheng。
+    if(stackPop.isEmpty){
+       while(!push.isEmpty){
+        stackPop.push(stackPush.pop());
+       }
+    }
+  }
+  public void push(int pushInt){
+    if(stackPop.isEmpty){
+      stackPush.push(pushInt);
+      goTo();
+    }
+  }
+  public int poll(){
+    if(stackPop.empty() && stackPush.empty()){
+      throw new RuntimeException("empty");
+    }
+    goTo();
+    return stackPop.pop();
+  }
+  public int peek(){
+    if(stackPop.empty() && stackPush.empty()){
+      throw new RuntimeException("empty");
+    }
+    goTo();
+    return stackPop.peek();
+  }
+
+}
