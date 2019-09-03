@@ -1,0 +1,50 @@
+画圈打印矩阵内的数
+code：
+
+public class PrintMatrixSpiralOrder{
+
+  public static void spiralOrder(int[][] matrix){
+    int row1 = 0;
+    int col1 = 0;
+    int row2 = matrix.length - 1;
+    int col2 = matrix[0].length - 1;
+    while(col1 <= col2 && row1 <= row2){
+      printEdge(matrix, row1 ++, col1 ++, row2 --, col2 --);
+      }
+  }
+  
+  public static void printEdge(int[][]m, int row1, int rol1, int row2, int col2){
+    if(row1 == row2){
+      for(int i = rol1; i < rol2; i ++){
+      system.out.print(m[row1][i] + " ");
+      }
+    }else if{col1 == col2){
+      for(int i = col1; i < col2; i ++){
+      system.out.print(m[i][col1] + " ");
+      }
+    }else{  //这是一圈的打印
+    
+      int curR = row1;
+      int curC = col1;
+      while(curC != col2){
+        system.out.print(m[row1][curC] + " ");
+        curC ++;
+      }
+      
+      while(curR != row2){
+        system.out.print(m[curR][col2] + " ")
+        curR ++;
+      }
+      while(curC != col1){
+        system.out.print(m[row2][colC] + " ")
+        curC --;
+      }
+      while(curR != row1){
+        system.out.print(m[curR][col1] + " ")
+        curR --;
+      }
+    
+    }     //一圈循环完毕
+       //返回到调用函数中的while部分，在新循环中 ， 再次执行这个圈
+  }
+}
