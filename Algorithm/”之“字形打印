@@ -1,0 +1,40 @@
+ ”之“字形打印一个矩阵
+ 
+ code:
+ public class ZigzagPrintMatrix{
+ 
+   public static void printMaxtrixZigzag(int[][] matrix){
+    
+    int row1 = 0;
+    int col1 = 0;
+    int row2 = 0;
+    int col2 = 0;
+    int endR = Matrix.length - 1;
+    int endC = Matrix.[0]length - 1;
+    boolean fromUp = false;
+    
+    while(row1 != endR + 1){  //在这个循环内，进行对角线更迭的算法，实现1点向右向下，2点向下向右。
+      printLevel(Matrix, int row1, int col1, int row2, int col2, fromUp);
+      row1 = col1 == endC ? row1 + 1 : row1;
+      col1 = col1 == endC ? col1  : col1 + 1;
+      row2 = row2 == endR ? row2 : row2 + 1;
+      col2 = row2 == endR ? col2 + 1 : col2;
+      fromUp = !fromUp;
+    }
+    //??System.out.println();
+   }
+    
+    public static void printLevel(int[][]m, int row1, int col1, int row2, int col2, boolean fromUp){
+      if(fromUp){
+        while(row1 <= row2){
+          System.ou.print(m[row1 ++][col1 --]);
+        } 
+       else{
+         while(row2 != row1 -1){//这里的row1 - 1，实际上是获得了一个在row1上面的行， 而不是下面。或者我们可以这样：row2 >= row1;
+           System.out.print(m[row2 --][col2 ++]);
+          }
+        }
+      }
+    }
+
+ }
