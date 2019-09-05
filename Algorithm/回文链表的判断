@@ -1,0 +1,78 @@
+判断回文链表：
+有三个方法，对应空间复杂度最小的，算法越复杂
+1.将链表a押入一个新的栈 b中，再从b栈中取出数，和a比较。空间o（n） 
+2.快慢指针，快指针走完，慢指针到达中点，慢指针的右半部分押入栈中，再进行方法1中的比较。o（n）
+3.快慢指针，快指针走完，慢指针到达中点，慢指针后面的部分逆序，o（1）
+  结束后，需要将链表调回原来状态。 
+ code
+public class IsPalindromeList {
+
+	public static class Node {
+		public int value;
+		public Node next;
+
+		public Node(int data) {
+			this.value = data;
+		}
+	}
+
+	// need o(n) extra space
+	public static boolean isPalindrome1(Node head) {
+		Stack<Node> stack = new Stack<Node>();
+		Node cur = head;
+		while (cur != null) {
+			stack.push(cur);
+			cur = cur.next;
+		}
+		while (head != null) {
+			if (head.value != stack.pop().value) {
+				return false;
+			}
+			head = head.next;
+		}
+		return true;
+	}
+
+	// need n/2 extra space
+ public static boolean ispalindrome2(Node head){
+  if(head == null || head.next == null){//只有0或1个数。
+    return true;
+  }
+  Node right = head.next;
+  Node cur = head;
+  while(currr.next != null && cur.next.next != null){
+    right = right.next;//慢
+    cur = cur.next.next;//快
+  ]
+  Stack<Node> stack = new Stack<Node>();
+  while(!stack.isEmpty()){
+    if(head.value != stack.pop().value){
+      return false;
+    }
+   head = head.next;
+   }
+   return true;
+  }
+  
+  //o(1)的空间复杂度。不建立新的栈，只将后半段的链表逆序。
+  
+  public static boolean isPalindromeList(Node head){
+    if(head == null || head.next == null){
+      return true;
+    }
+    Node n1 = head;
+    Node n2 = head;
+    while(n2.next != null && n2.next.next != null){
+      n1 = n1.next;//慢
+      n2 = n2.next;//快
+    }
+    //此时快指针
+    }
+    }
+  
+  }
+  
+  
+  
+  
+}
