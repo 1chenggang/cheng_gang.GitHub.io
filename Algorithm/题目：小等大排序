@@ -1,4 +1,4 @@
-小等大排序SmallerEqualBigger||pivot
+小等大排序SmallerEqualBigger || pivot(targrt)
 public  class SmallerEqualBiger{
 
   public static class Node{
@@ -15,11 +15,48 @@ public  class SmallerEqualBiger{
     }
     Node cur = head;
     int i = 0;
-    while(cur != null){
+    while(cur != null){//遍历之后 得到链表长度i
     i++;
-    cur = cur.nextl;
+    cur = cur.next;
     }
-    。。。
+    
+    Node nodeaArr = new Node[i];//建立一个新的链表，大小和原链表一样
+    i = 0;
+    cur = head;
+    for(i = 0; i != nodeArr.length; i ++){//链表传值到新建立的链表中
+      nodeArr[i] = cur;
+      cur = cur.next;
+    }
+    arrPartition(nodeArr, pivot);//调用排序整理函数
+    for(i = 0; i != nodeArr.length; i  ++){//将整理好的nodeArr链表化，整理得到最后结果
+      nodeArr[i -1].next = nodeArr[i];
+    }
+    nodeArr[i - 1].next = null;//需要注意循环最后，i = nodeArr.length ，i - 1为链表最后一个
+    return nodeArr[0];//返回头节点
   }
+  
+  public static void arrPartition(Node nodeArr, int pivot){
+    int smaller = -1;//定义一个从起始位置index的前一位，此时正在遍历nodeArr[index]
+    int bigger = nodeArr.length;//如果该数小于pivot，则该数应当去前面，去到的位置为
+    int index = 0;//smaller的下一个位置。同理，bigger向前的一位。
+                  //为什么bigger不为nodeArr.length + 1？因为起始位是从0
+                  //开始，为了避免index和smaller重复，取smaller为-1.
+  
+    while(index != big){
+      if(nodeArr[index].value < pivot){
+        swap(nodeArr, ++smaller, index++);
+      }else if(nodeArr[index].value = pivot){
+        index++；
+      }else{
+         swap(nodeArr, --bigger, index++);
+      }
+    }
+  }
+  public static void swap(Node nodeArr, int a, int b){
+    Node tmp = nodeArr[a];
+    nodeArr[a] = nodeArr[b];
+    nodeArr[b] = tmp;
+  }
+  
 
 }
