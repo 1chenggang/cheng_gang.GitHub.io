@@ -46,9 +46,60 @@ public class FindFirstIntersectNode{
    Node loop1 = getLoopNode(head1);
    Node loop2 = getLoopNode(head2);
    
-   if(
+   if(loop1 != null && loop2 != null){
+    return noLoop(head1, head2);
+   }
+   if(loop1 == null && loop2 == null){
+    return bothLoop(head1, head2);
+   }
+   return null;
   }
   
+  public static Node getLoopNode(Node head){        //通过快慢指针判断,寻找环
+    if(head == null || head.next == null || head.next.next == null){
+      return null;
+    }
+    Node n1 = head.next;//慢
+    Node n2 = head.next.next;//快
+    while(n1 != n2){
+      if(n2.next == null || n2.next.next == null){
+        return null;
+      }
+      //不满足while继续循环
+
+      n2 = n2.next.next;
+      n1 = n1.next;
+    }
+    //当n2走到尾部为空的时候，n2挪到头。
+    n2 = head;
+    //再次遍历，n2也变成慢指针
+    while(n1 != n2){
+    n2 = n2.next;
+    n1 = n1.next;
+    }
+    return n1;
+  }
+  
+  public static Node noLoop(Node head1, Node head2){
+    if(head1 == null || head2 == null){
+      return null;
+    }
+    Node cur1 = head1;
+    Node cur2 = head2;
+    //先得到两个链表的长度，n1, n2,在计算出差值作为较长链表开始的位置
+    
+    int n = 0;
+    while(cur1.next != null){
+      n++;
+      cur1= cur1.next;
+    }
+    while(cur2.next != null){
+      n--;
+      cur2= cur2.next;
+    }//得到了差值。
+    
+    
+  }
   
   
   
