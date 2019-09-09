@@ -1,0 +1,81 @@
+方法1.
+hash表的使用
+hash表内存放的是内存地址
+当遇到内存地址相同的时候找到这个结点
+
+public static Node getFistLoopNode(Node head){
+  HashSet<Node> = new HashSet<Node>();
+  
+  while(head != null){
+    if(set.contains(head)){//判断hash表中否有head地址
+      return head;
+    }
+    set.add(head);
+    head = head.next;
+  }
+  return null;
+}
+
+
+快慢指针 时间复杂度o（n）
+如果无环，则快指针会为空
+
+如果有环，则快慢指针一定会相遇
+相遇后，将快指针回到开头，接下来快指针一次走一步，相遇位置为第一个环结点。
+第一步先判断两个链表是否都不为空；
+第二步判断链表是否有环，针对无环和有环分别判断
+      不会出现一个有一个无还有交点的情况，因为相交就意味着合一了。
+code：
+
+public class FindFirstIntersectNode{
+
+  public static class Node{
+    public int value;
+    public Node next;
+    
+    public Node(int data){
+      this.value = data;
+    }
+  }
+  
+  public static Node getIntersectNode(Node head1, Node head2){
+   if(head1 == null || head2 ==null){
+    return null;
+   }
+   
+   Node loop1 = getLoopNode(head1);
+   Node loop2 = getLoopNode(head2);
+   
+   if(
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+}
