@@ -1,0 +1,39 @@
+ListNode的结构
+
+ListNode* temp1 = new Solution::ListNode(0); //创建新元素，
+ListNode* l1 = temp1; //最后的结果l1指向temp1，这样可以获取temp所接收的全部元素，而temp的指针由于每次都往下移，所以每次都更新
+
+
+两链表数相加：
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* dummyHead = new ListNode(0);
+        ListNode* curr = dummyHead;
+        int carry = 0;
+        int sum;
+        while (l1 || l2){
+            sum = 0;
+            if (l1){
+                sum += l1->val;
+                l1 = l1->next;
+            }
+            if (l2){
+                sum += l2->val;
+                l2 = l2->next;
+            }
+            sum += carry;
+            carry = sum / 10;
+            curr->next = new ListNode(sum % 10);
+            curr = curr->next;
+        }
+        if (carry > 0) 
+            curr->next = new ListNode(carry);
+        return dummyHead->next;
+    }
+};
+
+作者：jimmy00745
+链接：https://leetcode-cn.com/problems/add-two-numbers/solution/guan-fang-ti-jie-de-python3-c-shi-xian-by-jimmy007/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
