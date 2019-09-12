@@ -1,0 +1,30 @@
+leetcode:703
+建立一个大小为k的堆，堆为增序排列，堆的实现使用优先队列
+C++中的“优先队列（priority_queue）"，包含在头文件queue中。优先队列具有队列的所有特性，包括基本操作，
+只是在这基础上添加了内部的一个排序，它本质是一个堆实现的。
+
+定义：priority_queue<Type, Container, Functional>
+
+Type 就是数据类型，
+Container 就是容器类型（Container必须是用数组实现的容器，比如vector,deque等等，但不能用 list。STL里面默认用的是vector），
+Functional 就是比较的方式，当需要用自定义的数据类型时才需要传入这三个参数，使用基本数据类型时，只需要传入数据类型，默认是大根堆 。
+
+class KthLargest {
+public:
+    priority_queue<int, vector<int>, greater<int>> pq;
+    int size;
+
+    KthLargest(int k, vector<int> nums) {
+        size=k;//将小根堆的大小控制在k
+        for(int i=0;i<nums.size();i++) {
+            pq.push(nums[i]);
+            if(pq.size()>k) pq.pop();
+        }
+    }
+    
+    int add(int val) {
+        pq.push(val);
+        if(pq.size()>size) pq.pop();
+        return pq.top();
+    }
+};
