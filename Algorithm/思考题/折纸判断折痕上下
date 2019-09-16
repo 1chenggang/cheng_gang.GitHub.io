@@ -1,0 +1,24 @@
+将一张纸对折n次后，输出折痕上下的排列情况。
+利用二叉树的中序遍历,利用递归构建二叉树的上下值
+i:第几层
+N：共几层
+boolean down：确定上下。
+code:
+public class PaperFlods(int N){
+
+   public static void print(int N){
+    printprocess(i, N, true);  
+   }
+   public static void printProcess(int i, int N, boolean down){
+    if(i > N){
+     return ;
+    }
+    
+    printProcess(i + 1, N, true);
+    System.out.print(down ? down : up);
+    printProcess(i + 1, N, false);
+   }
+   
+   
+
+}
