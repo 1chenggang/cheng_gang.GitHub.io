@@ -1,0 +1,35 @@
+分情况判断
+1. node的子结点有右结点的时候
+    寻找子结点的最后一个左结点；
+2.node的子结点无右结点时，
+    判断父结点的情况
+     3.子结点是父结点的左结点的时候，
+        返回父结点
+      4.如果找不到这样的父结点，返回null；
+      
+code：
+
+public static Node getSuccessorNode(int node){
+
+  if(node.right != null){
+    getMostLeft(node.right);
+  }else{
+    Node parent = node.parent;
+    while(parent != null || parent.left == node){//继续向上遍历，去寻找子结点为父结点左结点的结点
+      node = node.parent;
+      parent = node.parent;
+    }
+     return node;
+
+  }
+  public static Node getMostLeft(int node){
+    if(node == null){
+      return node;
+    }//有必要吗？
+    while(node.left != null){
+      node = node.left;
+    }
+    return node;
+  }
+  
+}
