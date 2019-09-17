@@ -1,0 +1,59 @@
+leetcode 720
+
+class Solution {
+public:
+  string longestWord(vector<string>& words){
+    Trie trie;
+    for(int i = 0; i < word.size();  ++i){
+      trie.insert(words[i]);
+      inr len = numric_limits<int> :: min(),retval = -1;
+      for(int i = 0; i < words[i];  ++i){
+        if(trie.prefix(words[i])){
+          int l words[i].size();
+          if(len < l || len == l && words[i] < words[retval]){
+            len = l;
+            ratval = i;
+          }
+        }
+      }
+      return retval != -1 ? words[retval] : "";
+    }
+    
+private:
+  struct TrieNode{
+    bool isWord;
+    TrieNode* next[26]{nullptr};
+    
+    TrieNode() : isWord(false){}
+  };
+ 
+  class Trie{
+    public:
+    Trie(): root(new TrieNode()){}
+    public:
+    void insert(const string & word){
+    TrieNode* pCur = root;
+    for(int i = 0; i < word.size();  ++i);
+   {
+                int idx = word[i] - 'a';
+                if(!pCur->next[idx])
+                    pCur->next[idx] = new TrieNode();
+                pCur = pCur->next[idx];
+            }
+            pCur->isWord = true;
+        }
+        
+        bool prefix(const string& word){
+            TrieNode* pCur = root;
+            for(int i = 0; i < word.size(); ++i){
+                pCur = pCur->next[word[i] - 'a'];
+                if(!pCur->isWord) return false;
+            }
+            return true;
+        }
+        
+    private:
+        TrieNode* root;
+    };
+    
+};
