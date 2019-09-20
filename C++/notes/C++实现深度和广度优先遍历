@@ -1,0 +1,41 @@
+深度优先：
+沿着树的深度遍历结点，尽可能深的搜索树的分支。
+如果当前的节点所在的边都被搜索过，就回溯到当前节点所在的那条边的起始节点。
+一直重复直到进行到发现源节点所有可达的节点为止。
+
+//深度优先遍历
+void depthFirstSearch(Tree root){
+    stack<Node *> nodeStack;  //使用C++的STL标准模板库
+    nodeStack.push(root);
+    Node *node;
+    while(!nodeStack.empty()){
+        node = nodeStack.top();
+        printf(format, node->data);  //遍历根结点
+        nodeStack.pop();
+        if(node->rchild){
+            nodeStack.push(node->rchild);  //先将右子树压栈
+        }
+        if(node->lchild){
+            nodeStack.push(node->lchild);  //再将左子树压栈
+        }
+    }
+}
+
+
+//广度优先遍历
+void breadthFirstSearch(Tree root){
+    queue<Node *> nodeQueue;  //使用C++的STL标准模板库
+    nodeQueue.push(root);
+    Node *node;
+    while(!nodeQueue.empty()){
+        node = nodeQueue.front();
+        nodeQueue.pop();
+        printf(format, node->data);
+        if(node->lchild){
+            nodeQueue.push(node->lchild);  //先将左子树入队
+        }
+        if(node->rchild){
+            nodeQueue.push(node->rchild);  //再将右子树入队
+        }
+    }
+}
