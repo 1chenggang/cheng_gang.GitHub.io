@@ -1,0 +1,31 @@
+只需将函数的形参设置为指针，即可实现传递指针给函数
+在调用这个函数的时候也同样需要传入的是地址
+code：
+#include <iostream>
+#include <ctime>
+ 
+using namespace std;
+void getSeconds(unsigned long *par);
+ 
+int main ()
+{
+   unsigned long sec;
+ 
+ 
+   getSeconds( &sec );
+ 
+   // 输出实际值
+   cout << "Number of seconds :" << sec << endl;
+ 
+   return 0;
+}
+ 
+void getSeconds(unsigned long *par)
+{
+   // 获取当前的秒数
+   *par = time( NULL );
+   return;
+}
+
+//输出
+Number of seconds :1294450468
