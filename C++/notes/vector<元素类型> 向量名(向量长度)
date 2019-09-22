@@ -1,0 +1,10 @@
+ vector<int> edge1(maxn) ，定义了一个名为edge1的向量，且此向量有maxn个元素，元素类型为int类型。
+ vector<vector<int>> edge2(maxn)，定义了一个名为edge2的向量，此向量有maxn个元素，元素类型为vector<int> 类型。
+
+一般情况：vector<元素类型> 向量名(向量长度).
+
+把上面的两个定义分别来对应3中的名字就很清楚了。
+
+在 1 中：元素类型为 “int 类型”、向量名为“edge”、向量长度为“maxn”
+
+在 2 中：元素类型为 "vector<int>类型”、向量名为“edge2”、向量长度为”maxn“
