@@ -1,0 +1,196 @@
+https://www.jianshu.com/p/b02b1cb96b9d
+
+1. vector的特点
+内存特点： 内存空间连续，随机访问效率高。
+插入删除：插入或者删除某个元素，需要将现有元素进行复制，移动。
+
+如果vector中存储的对象很大，或者构造函数复杂，则在对现有元素进行拷贝时开销较大，因为拷贝对象要调用拷贝构造函数。对于简单的小对象，vector的效率优于list。vector在每次扩张容量的时候，将容量扩展2倍，这样对于小对象来说，效率是很高的。
+应用场景：vector适用于对象数量少，简单对象，随机访问元素频繁。支持高效的随机访问和尾端插入、删除操作，其它位置的插入、删除效率低下。
+
+2. list
+内存特点：内存空间不连续，依靠指针来连接。具有双链表结构，每个元素维护一个前向和后向指针，因此支持前向、后向遍历。
+插入删除：支持高效的随机插入、删除操作，但随机访问效率低下，且需要额外维护指针，开销也较大。
+应用场景： list适用于对象数量变化大，对象复杂，插入和删除频繁。
+
+3. deque
+内存特点：内存空间连续，与vector类似，不同之处在于deque提供了两级数据结构，
+
+第一级完全类似于vector，代表实际容器
+另一级维护容器的首位地址。
+插入删除：支持高效的首端 尾端 插入/ 删除操作。其它位置的插入、删除效率低下。
+
+4. vector、list、deque比较
+随机访问操作，选择vector
+若已知存储元素size，选择vector
+需要随机 插入 删除，（不仅仅在两端），选择list
+只有需要在首端进行插入、删除操作的时候，才选择deque，否则选择vector
+若既需要随机插入、删除，又需要随机访问，则需要在vector和list之间做折中。
+当要存储的是大型的数据类对象时，list要优于vector。
+（也可以使用vector来存储指向对象的指针，同样会取得较高的效率，但是指针的维护容易出错，不推荐）
+5. capacity vs size
+capacity是容器需要增长之前，能够盛的元素总数；只有连续存储的容器才有capacity的概念（例如vector，deque，string），list不需要capacity。
+size是容器当前存储的元素的数目。
+vector默认的容量初始值，以及增长规则是依赖于编译器的。
+6. 用vector存储自定义类对象时，自定义类对象须满足：
+有可供调用的无参构造函数
+有可用的拷贝赋值函数
+7. 迭代器 iterator
+vector与deque的迭代器支持算术运算
+list的迭代器只能进行++/--操作，不支持普通的算数运算。
+1. C++中vector 用法详解
+
+vector 详细介绍
+1. vector剖析：
+
+vector 的数据安排以及操作方式，与 array 非常像似。两者的唯一差别在于空间的运用弹性。
+
+array是静态空间
+vector 是动态空间，随着元素的加入，它的内部机制会自行扩充空间以容纳新元素。
+因此，vector 的运用对于内存的樽节与运用弹性有很大的帮助，我们再也不必因为害怕空间不足而一开始就要求一个大块头 array 了，我们可以安心使用vector，吃多少用多少。
+vector 的使用技术，关键在于其对大小的控制以及重新配置时的数据搬移效率。
+一旦 vector 旧有空间满载，如果客端每新增一个元素，vector 内部只是扩充元素的空间，实为不智，因为所谓扩充空间（不论多大），在创建一个vector 后，它会自动在内存中分配一块连续的内存空间进行数据存储，初始的空间大小可以预先指定也可以由vector 默认指定，这个大小即capacity （）函数的返回值。当存储的数据超过分配的空间时vector 会重新分配一块内存块，但这样的分配是很耗时的，在重新分配空间时它会做这样的动作：
+
+首先，vector 会申请一块更大的内存块；(2的指数级增长)
+
+然后，将原来的数据拷贝到新的内存块中；
+
+其次，销毁掉原内存块中的对象（调用对象的析构函数）；
+
+最后，将原来的内存空间释放掉。
+
+2. vector 的特点：
+
+指定一块如同数组一样的连续存储，但空间可以动态扩展。即它可以像数组一样操作，并且可以进行动态操作。通常体现在push_back()pop_back() 。
+
+随机访问方便，它像数组一样被访问，即支持[ ] 操作符和vector.at()
+
+节省空间，因为它是连续存储，在存储数据的区域都是没有被浪费的，但是要明确一点vector 大多情况下并不是满存的，在未存储的区域实际是浪费的。
+
+在内部进行插入、删除操作效率非常低，这样的操作基本上是被禁止的。Vector 被设计成只能在后端进行追加和删除操作，其原因是vector 内部的实现是按照顺序表的原理。
+
+只能在vector 的最后进行push 和pop ，不能在vector 的头进行push 和pop 。
+
+当动态添加的数据超过vector 默认分配的大小时要进行内存的重新分配、拷贝与释放，这个操作非常消耗性能。 所以要vector 达到最优的性能，最好在创建vector 时就指定其空间大小。
+
+Vectors 包含着一系列连续存储的元素,其行为和数组类似。访问Vector中的任意元素或从末尾添加元素都可以在常量级时间复杂度内完成，而查找特定值的元素所处的位置或是在Vector中插入元素则是线性时间复杂度
+
+3 vector的函数
+
+1.Constructors 构造函数
+vector<int> v1; //构造一个空的vector
+vector<int> v1( 5, 42 ); //构造了一个包含5个值为42的元素的Vector
+3.2.Operators 对vector进行赋值或比较
+
+C++ Vectors能够使用标准运算符: ==, !=, <=, >=,<, 和 >.
+要访问vector中的某特定位置的元素可以使用 [] 操作符.
+两个vectors被认为是相等的,如果:
+
+1.它们具有相同的容量
+2.所有相同位置的元素相等.
+vectors之间大小的比较是按照词典规则.
+
+3.assign() 对Vector中的元素赋值
+语法：
+void assign( input_iterator start, input_iterator end );
+// 将区间[start, end)的元素赋到当前vector
+void assign( size_type num, const TYPE &val );
+// 赋num个值为val的元素到vector中,这个函数将会清除掉为vector赋值以前的内容.
+4.at() 返回指定位置的元素
+
+语法：
+
+TYPE at( size_type loc );//差不多等同v[i];但比v[i]安全;,到后边有例子说明
+5.back() 返回最末一个元素
+6.begin() 返回第一个元素的迭代器
+7.capacity() 返回vector所能容纳的元素数量(在不重新分配内存的情况下）
+8.clear() 清空所有元素
+9.empty() 判断Vector是否为空（返回true时为空）
+10.end() 返回最末元素的迭代器(译注:实指向最末元素的下一个位置)
+11.erase() 删除指定元素
+语法：
+
+iterator erase( iterator loc );//删除loc处的元素
+iterator erase( iterator start, iterator end );//删除start和end之间的元素
+那好,既然删除了元素,那我们来看看他的空间是不是也缩小了或者他的大小
+
+void main( )
+{
+  vector<int> vec1;
+  vec1.push_back(1);
+  vec1.push_back(2);
+  vec1.push_back(3);
+  cout<<vec1.capacity()<<","<<vec1.size()<<endl;
+  vec1.erase(vec1.begin());
+  cout<<vec1.capacity()<<","<<vec1.size()<<endl;
+  vec1.erase(vec1.begin());
+  cout<<vec1.capacity()<<","<<vec1.size()<<endl;
+  cout<<vec1[2];//在这里我们应该看到了，如果用vec1.at(2)访问肯定是非法的数据
+}
+从这个简单的例子说明了一个问题，在erase删除元素的时候，并不会回收capacity容量的大小的，只是将元素向前移位，并且修改了size的大小，并不是真正意义上的删除，另外为了安全的访问最好使用at()函数而不是下标访问。
+
+12.front() 返回第一个元素的引用
+13.get_allocator() 返回vector的内存分配器
+14.insert() 插入元素到Vector中
+
+语法：
+
+iterator insert( iterator loc, const TYPE &val );
+//在指定位置loc前插入值为val的元素,返回指向这个元素的迭代器,
+void insert( iterator loc, size_type num, const TYPE &val );
+//在指定位置loc前插入num个值为val的元素
+void insert( iterator loc, input_iterator start, input_iterator end );
+//在指定位置loc前插入区间[start, end)的所有元素
+15.max_size() 返回Vector所能容纳元素的最大数量（上限）
+16.pop_back() 移除最后一个元素
+17.push_back() 在Vector最后添加一个元素
+18.rbegin() 返回Vector尾部的逆迭代器
+19.rend() 返回Vector起始的逆迭代器
+20.reserve() 设置Vector最小的元素容纳数量
+
+补充说明：
+
+1. 内存管理效率
+四个内存相关函数：
+
+size()：容器中实际容纳了多少元素
+告诉你容器中有多少元素。它没有告诉你容器为它容纳的元素分配了多少内存。
+
+capacity()：容器最大可容纳的元素，如果超过此值，需要重新动态分配一块1.5至2倍大小的内存，将现有元素赋值过去，然后销毁之前的内存。
+告诉你容器在它已经分配的内存中可以容纳多少元素。那是容器在那块内存中总共可以容纳多少元素，而不是还可以容纳多少元素。如果你想知道一个vector或string中有多少没有被占用的内存，你必须从capacity()中减去size()。如果size和capacity返回同样的值，容器中就没有剩余空间了，而下一次插入（通过insert或push_back等）会引发上面的重新分配步骤。
+
+resize(): 强制容器容纳N个元素
+强制把容器改为容纳n个元素。调用resize之后，size将会返回n。如果n小于当前大小，容器尾部的元素会被销毁。如果n大于当前大小，新默认构造的元素会添加到容器尾部。如果n大于当前容量，在元素加入之前会发生重新分配。
+
+reserve(): 强制将容量改为N
+强制容器把它的容量改为至少n，提供的n不小于当前大小。这一般强迫进行一次重新分配，因为容量需要增加。（如果n小于当前容量，vector忽略它，这个调用什么都不做，string可能把它的容量减少为size()和n中大的数，但string的大小没有改变。在我的经验中，使用reserve来从一个string中修整多余容量一般不如使用“交换技巧”，那是条款17的主题。）
+
+增加效率的方法：
+
+使用reserve()函数提前设定容量大小，避免多次容量扩充操作导致效率低下。
+说明：在通过 reserve() 来申请特定大小的时候总是按指数边界来增大其内部缓冲区。当进行insert或push_back等增加元素的操作时，如果此时动态数组的内存不够用，就要动态的重新分配当前大小的1.5~2倍的新内存区，再把原数组的内容复制过去。所以，在一般情况下，其访问速度同一般数组，只有在重新分配发生时，其性能才会下降。
+vector v;
+v.reserve(1000);
+for (int i = 1; i <= 1000; ++i) 
+    v.push_back(i);
+使用“交换技巧”来修整vector过剩空间/内存
+vector(ivec).swap(ivec);
+有一种方法来把它从曾经最大的容量减少到它现在需要的容量。
+
+使用swap方法强行释放STL vector 所占内存
+template < class T> 
+void ClearVector( vector& v )
+{
+  vector vtTemp;
+  vtTemp.swap( v );
+}
+
+//如
+vector v ;
+nums.push_back(1);
+nums.push_back(3);
+nums.push_back(2);
+nums.push_back(4);
+vector().swap(v);
+/* 或者v.swap(vector()); */
+/*或者{ std::vector tmp = v;   v.swap(tmp);   }; //加大括号{ }是让tmp退出{ }时自动析构*/
+
