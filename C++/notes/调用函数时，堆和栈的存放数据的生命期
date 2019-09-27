@@ -1,0 +1,10 @@
+stack会储存一些生成的对象和local object (auto object )自动清理
+  他的析构函数会被自动调用
+  static local object : 生命在作用域结束之后一直存在，直到程序结束
+而heap针对于 new申请的动态内存，属于全局，之后有责任去delete[]
+如
+Complex* p = new Complex;
+new之后得到的指针在离开作用域之后就销毁，但是空间还在，造成泄漏。
+
+对于定义在所有大括号之外的object，其生命在整个程序结束之后才结束，你也可以将它视为
+一种static object，其作用域时【整个程序】
