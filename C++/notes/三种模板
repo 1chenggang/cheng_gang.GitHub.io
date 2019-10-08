@@ -1,0 +1,6 @@
+分别为 class template：类的数据为模板定义
+
+      function template：函数的参数含有模板
+      
+      member template:模板内有模板组成的成员。
+      
