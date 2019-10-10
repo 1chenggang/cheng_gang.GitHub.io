@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int size = nums.size();        
+        int max = nums[0];
+        int dp[size];
+        dp[0] = nums[0];
+        
+        for(int i = 1; i < size; i++){
+            
+            if(dp[i - 1] + nums[i] >= nums[i]){//一定要和nums[i]比较，
+                                            //只有这样，才能断链，排除前面干扰；
+                //其实 dp内的值，只要是负数，就会不满足这个if，我们这样做就会从去一直寻找，
+                //找第一个非负数作为起点，如果没有，那么dp将会走到最后一位的过程中，去记录最大的负数
+                dp[i] = dp[i - 1] + nums[i];
+            }else{
+                dp[i] = nums[i];
+            }
+            
+            if(dp[i] > max){
+                max = dp[i];
+            }
+            
+            
+        }
+        
+        
+        return max;
+    }
+};
