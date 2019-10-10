@@ -1,0 +1,12 @@
+    int i = 1;
+    int x = 5;
+
+    int& p = i;//p的大小要看i，它代表的东西多大，它就多大
+    //sizeof(p) = sizeof(i);
+    //&p == &i;
+    //而这些表象都是假象
+    int& r = p;
+    p = x;
+
+    cout << r<< endl;
+    cout << p<< endl;
