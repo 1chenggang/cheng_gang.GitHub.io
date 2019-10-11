@@ -1,0 +1,29 @@
+
+“多态（polymorphism）”指的是同一名字的事物可以完成不同的功能。多态可以分为编译时的多态和运行时的多态。
+前者主要是指函数的重载（包括运算符的重载）、对重载函数的调用，在编译时就能根据实参确定应该调用哪个函数，因此叫编译时的多态；
+而后者则和继承、虚函数等概念有关，是本章要讲述的内容。
+
+虚函数为多态的一种
+class A
+{
+public:
+    virtual void foo()
+    {
+        cout<<"A::foo() is called"<<endl;
+    }
+};
+class B:public A
+{
+public:
+    void foo()
+    {
+        cout<<"B::foo() is called"<<endl;
+    }
+};
+int main()
+{
+    A* a = new B();
+    a->foo();   // 在这里，a虽然是指向A的指针，但是被调用的函数(foo)却是B的!
+    return 0;
+}
+//定义他为虚函数是为了允许用基类的指针来调用子类的这个函数。
