@@ -1,0 +1,13 @@
+
+成员函数的括号后，函数本体前的const表示：
+我这个成员函数不打算去改变data，可能只是读一下，请编译器帮我把关
+const成员函数 可以调用const obj和 non-const obj；
+
+const obj不可以调用non-const menber functions，因为有可能去改变这个const obj；
+
+
+函数的重载不必考虑return type；
+
+
+当成员函数的const和non-const函数同时存在的时候，const obj只能调用const版本成员函数，而non-const的obj只能调用non-const函数；
+cow： copy on write。
