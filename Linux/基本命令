@@ -1,0 +1,41 @@
+date 当前日期
+cal 日历 月份
+cal 2019 年历
+pwd 当前文件夹
+cd 退出或者进入文件夹
+ls 当前文件列出 -l 显示细节
+
+
+mkdir 创建文件夹 
+rmdir 删除文件夹
+
+cp 复制
+cat 查看
+diff 比较两个文件的差异
+
+head  头几行 head -n 5；
+tail查看文件后几行
+
+
+wc 查单词 wc -file2 
+  行数 单词数 字符数
+  -l 行数
+  -w 单词数
+  -c 字符数
+  
+  
+ rm 删除文件
+ mv 移动或者更名
+ less 缩略显示 q退出
+ 
+ 
+ 
+ 
+- rwx rwx rwx 读写运行
+   U   G   O  用户 小组 其他人
+   
+   
+   grep命令 搜索字符 grep [A-Za-z]idhaa file1 | wc -l
+   
+   chmod 修改不权限 chmod go-r
+                  chmod u+x
