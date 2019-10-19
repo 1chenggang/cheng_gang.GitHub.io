@@ -39,3 +39,6 @@ wc 查单词 wc -file2
    
    chmod 修改不权限 chmod go-r
                   chmod u+x
+
+wget  下载
+
