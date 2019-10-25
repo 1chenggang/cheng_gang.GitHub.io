@@ -42,3 +42,5 @@ wc 查单词 wc -file2
 
 wget  下载
 
+超级用户 init 0 关机
+        inti 6 重启
