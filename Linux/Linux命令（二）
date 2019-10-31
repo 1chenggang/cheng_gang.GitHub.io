@@ -2,4 +2,4 @@ df -h |grep "sda1" |cut -d":" -f 5
 内存情況|管道命令|cut：分隔的第5行
 
 
-find / -name httpd.conf
+find / -name httpd.conf 寻找文件
