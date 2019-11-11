@@ -3,3 +3,4 @@ df -h |grep "sda1" |cut -d":" -f 5
 
 
 find / -name httpd.conf 寻找文件
+/etc/init.d/sshd start
